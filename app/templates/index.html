@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}
+Generate Proposal
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="hero-copy">
+        <h1>
+            Generate persuasive client proposals in seconds.
+        </h1>
+
+        <p>
+            Create high-converting proposals, subject lines,
+            CTAs, and follow-ups using AI.
+        </p>
+    </div>
+</section>
+
+<section class="card form-card">
+
+    <form id="proposal-form">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="niche">Client Niche</label>
+                <input
+                    type="text"
+                    id="niche"
+                    name="niche"
+                    placeholder="e.g. Real Estate Coach"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="platform">Platform</label>
+
+                <select id="platform" name="platform" required>
+                    <option value="">Select platform</option>
+                    <option>Upwork</option>
+                    <option>Email</option>
+                    <option>WhatsApp</option>
+                    <option>Fiverr</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="tone">Tone</label>
+
+            <select id="tone" name="tone" required>
+                <option value="">Select tone</option>
+                <option>Professional</option>
+                <option>Persuasive</option>
+                <option>Friendly</option>
+                <option>Confident</option>
+                <option>Luxury</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="problem">Client Problem</label>
+
+            <textarea
+                id="problem"
+                name="problem"
+                rows="6"
+                placeholder="Describe the client's problem..."
+                required
+            ></textarea>
+        </div>
+
+        <button type="submit" class="primary-btn" id="generate-btn">
+            Generate Proposal
+        </button>
+
+    </form>
+
+</section>
+
+<div id="loading-state" class="loading-state hidden">
+    <div class="spinner"></div>
+    <p>Generating proposal...</p>
+</div>
+
+<div id="error-state" class="error-state hidden">
+    Something went wrong. Please try again.
+</div>
+
+<section id="result-section" class="hidden">
+
+    <div class="section-header">
+        <h2>Generated Results</h2>
+    </div>
+
+    <div class="result-grid">
+
+        <div class="card result-card">
+            <div class="result-header">
+                <h3>Proposal</h3>
+
+                <button class="copy-btn" data-copy="proposal-output">
+                    Copy
+                </button>
+            </div>
+
+            <pre id="proposal-output"></pre>
+        </div>
+
+        <div class="card result-card">
+            <div class="result-header">
+                <h3>CTA</h3>
+
+                <button class="copy-btn" data-copy="cta-output">
+                    Copy
+                </button>
+            </div>
+
+            <pre id="cta-output"></pre>
+        </div>
+
+        <div class="card result-card">
+            <div class="result-header">
+                <h3>Subject Line</h3>
+
+                <button class="copy-btn" data-copy="subject-output">
+                    Copy
+                </button>
+            </div>
+
+            <pre id="subject-output"></pre>
+        </div>
+
+        <div class="card result-card">
+            <div class="result-header">
+                <h3>Follow-up Message</h3>
+
+                <button class="copy-btn" data-copy="followup-output">
+                    Copy
+                </button>
+            </div>
+
+            <pre id="followup-output"></pre>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="history-section">
+
+    <div class="section-header">
+        <h2>Recent Proposals</h2>
+    </div>
+
+    <div id="history-container" class="history-list">
+
+        {% if history %}
+            {% for item in history %}
+                <div class="history-item">
+                    <div>
+                        <strong>{{ item.niche }}</strong>
+                        <p>{{ item.platform }}</p>
+                    </div>
+
+                    <small>
+                        {{ item.created_at }}
+                    </small>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-history">
+                No proposals generated yet.
+            </div>
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

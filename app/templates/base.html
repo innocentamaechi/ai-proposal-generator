@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Proposal Generator{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <header class="navbar">
+            <div class="container navbar-content">
+                <div class="logo">
+                    AI Proposal Generator
+                </div>
+
+                <div class="nav-actions">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="container main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', path='js/app.js') }}"></script>
+</body>
+</html>
